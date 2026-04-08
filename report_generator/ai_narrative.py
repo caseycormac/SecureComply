@@ -2,10 +2,34 @@ import os
 from sys import audit
 from openai import OpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# -------------------------
+# NEW: Load API key
+# -------------------------
+def load_api_key():
+    """
+    Loads OpenAI API key from:
+    1. Environment variable
+    2. Local file (openai.key)
+    """
 
+    # 1. Environment variable
+    key = os.getenv("OPENAI_API_KEY")
+    if key:
+        return key
+
+    # 2. Local file fallback
+    try:
+        with open("openai.key", "r") as f:
+            return f.read().strip()
+    except FileNotFoundError:
+        return None
+
+api_key = load_api_key()
+client = OpenAI(api_key=api_key) if api_key else None
 
 def generate_ciso_ai(audit: dict) -> str:
+    if client is None:
+        return None
     """
     Generates AI-powered CISO risk statement.
     Falls back if API fails.

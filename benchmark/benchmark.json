@@ -1,0 +1,14 @@
+{
+    "num_samples": 200,
+    "average_score": 49.21,
+    "quartiles": {
+        "q1": 43,
+        "median": 49,
+        "q3": 57
+    },
+    "category_averages": {
+        "basic_security_measures": 14.69,
+        "transparency_user_rights": 20.93,
+        "internal_controls": 13.6
+    }
+}

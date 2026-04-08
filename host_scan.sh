@@ -22,6 +22,19 @@ else
     PATCH_STATUS="outdated"
 fi
 
+# OPEN PORT COUNT (attack surface)
+OPEN_PORT_COUNT=0
+OPEN_PORTS=$(ss -tuln 2>/dev/null | awk 'NR>1 {print $5}' | awk -F: '{print $NF}' | sort -n | uniq)
+
+# Convert to comma-separated safely
+OPEN_PORTS=$(echo "$OPEN_PORTS" | paste -sd "," -)
+
+# Fallback
+if [ -z "$OPEN_PORTS" ]; then
+  OPEN_PORTS="none"
+fi
+OPEN_PORT_COUNT=$(echo "$OPEN_PORTS" | tr ',' '\n' | wc -l)
+
 # FIREWALL CHECK
 FIREWALL_ENABLED=false
 if ufw status | grep -q "Status: active"; then
@@ -51,7 +64,9 @@ cat <<EOF > $OUTPUT
    "patch_management_status": "$PATCH_STATUS",
    "firewall_enabled": $FIREWALL_ENABLED,
    "automatic_updates": $AUTO_UPDATES,
-   "system_logging_enabled": $SYSTEM_LOGGING
+   "system_logging_enabled": $SYSTEM_LOGGING,
+   "open_port_count": $OPEN_PORT_COUNT,
+   "open_ports": "$OPEN_PORTS"
  },
 
  "host_scan_timestamp": "$TIMESTAMP"

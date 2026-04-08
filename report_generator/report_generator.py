@@ -168,7 +168,9 @@ def _render_extra_security(audit: dict) -> str:
         "patch_management_status": "Patch Management",
         "firewall_enabled": "Firewall Enabled",
         "automatic_updates": "Automatic Updates",
-        "system_logging_enabled": "System Logging"
+        "system_logging_enabled": "System Logging",
+        "open_port_count": "Open Port Count",
+        "open_ports": "Open Ports"
     }
 
     for key, label in mapping.items():
@@ -178,7 +180,9 @@ def _render_extra_security(audit: dict) -> str:
             "patch_management_status": "Implement automated patch management and vulnerability remediation.",
             "firewall_enabled": "Enable host-based firewall to improve network boundary protection.",
             "automatic_updates": "Enable automatic security updates where possible.",
-            "system_logging_enabled": "Ensure system logging is enabled and logs are centrally monitored."
+            "system_logging_enabled": "Ensure system logging is enabled and logs are centrally monitored.",
+            "open_port_count": "Reduce exposed services to minimise attack surface.",
+            "open_ports": "Review exposed ports and disable unnecessary services."
         }.get(key, "")
 
         rows += f"""

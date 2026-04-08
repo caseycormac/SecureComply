@@ -26,7 +26,7 @@ SecureComply+ supports AI-generated CISO risk summaries using OpenAI.
 
 ### Enable AI (Recommended)
 
-1. Create a file or enter into premade file in the project root:
+1. Create a file in the project root:
 
 ```
 openai.key

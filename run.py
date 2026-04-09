@@ -520,14 +520,14 @@ def run_demo_pipeline():
 
     # 1. Generate SME data
     print("[+] Generating SME data...")
-    subprocess.run(["python", "generation.py"])
+    subprocess.run([sys.executable, "generation.py"])
 
     # 2. Host scan (skip on Windows)
     subprocess.run(["bash", "host_scan.sh"])
 
     # 3. Merge data
     print("[+] Merging data...")
-    subprocess.run(["python", "merge_host_data.py"])
+    subprocess.run([sys.executable, "merge_host_data.py"])
 
     return "data/merged_input_v4.json"
 

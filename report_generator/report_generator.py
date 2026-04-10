@@ -338,6 +338,39 @@ def _render_task_plan(audit: dict) -> str:
     </div>
     """
 
+# -----------------------------
+# NEW: Data Quality Score
+# -----------------------------
+def _calculate_data_quality(audit: dict) -> int:
+    """
+    Calculates data quality score based on missing/empty inputs.
+
+    WHY:
+    - "empty" values come from ingestion_module (missing data handling)
+    - Helps examiner understand reliability of audit
+    - Adds transparency (very important academically)
+
+    LOGIC:
+    - Count total inputs used in scoring
+    - Count how many were "empty"
+    - Return % completeness
+    """
+
+    total_fields = 0
+    empty_fields = 0
+
+    for c in audit.get("control_results", []):
+        total_fields += 1
+
+        # "empty" means missing data (from ingestion)
+        if str(c.get("input")).lower() == "empty":
+            empty_fields += 1
+
+    if total_fields == 0:
+        return 0
+
+    quality_score = int((1 - (empty_fields / total_fields)) * 100)
+    return quality_score
 
 # -----------------------------
 # Deterministic CISO-style statement (NO OpenAI)
@@ -533,6 +566,8 @@ def _render_controls_table(audit: dict) -> str:
 # -----------------------------
 def generate_html(audit: dict, source_json: str, use_ai: bool = True) -> str:
     score, band, summary = _overall_score_and_band(audit)
+    # NEW: Data Quality Score
+    data_quality = _calculate_data_quality(audit)
     #test
     benchmark = load_benchmark()
     #test
@@ -799,6 +834,16 @@ def generate_html(audit: dict, source_json: str, use_ai: bool = True) -> str:
           <div style="min-width:260px;">
             <div class="muted tiny">Overall Score</div>
             <div style="font-size:34px; font-weight:800;">{score}/100</div>
+                        <div style="margin-top:10px;">
+              <div class="muted tiny">Data Quality</div>
+              <div style="font-size:18px; font-weight:600;">
+                {data_quality}% 
+                {"⚠️ Low" if data_quality < 60 else "✔️ Good"}
+              </div>
+              <div class="muted tiny">
+                Measures completeness of input data
+              </div>
+            </div>
             <div class="muted" style="margin-top:6px; white-space:pre-wrap; line-height:1.5;">
               {_html_escape(summary)}
             </div>

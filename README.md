@@ -1,8 +1,8 @@
-# SecureComply+ GDPR Auditor - Cormac Casey - C00283808 - C00283808@setu.ie
+# SecureComply GDPR Audit Tool - Cormac Casey - C00283808 - C00283808@setu.ie
 
 ## Overview
 
-SecureComply+ is a command-line tool designed to assess GDPR compliance for Small and Medium Enterprises (SMEs). It analyses structured input data and produces a detailed audit report, including compliance scores, risk bands, and actionable recommendations.
+SecureComply is a command-line tool designed to assess GDPR compliance for Small and Medium Enterprises (SMEs). It analyses structured input data and produces a detailed audit report, including compliance scores, risk bands, and actionable recommendations.
 
 The tool is built to be simple & explainable, focusing on usability and transparency of scoring.
 
@@ -352,10 +352,10 @@ Top priority improvements based on:
 
 ## Author
 
-Namke: Cormac Casey
+Name: Cormac Casey
 Student No: C00283808
 email: C00283808@setu.ie
-SecureComply+ GDPR Auditor
+SecureComply GDPR Audit Tool
 
 ---
 

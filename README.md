@@ -111,9 +111,7 @@ python run.py <input.json> --no-ai
 │
 ├── generation.py              # Synthetic SME data generator
 ├── config.py                  # Configuration settings
-│
-├── .venv / venv               # Virtual environments (ignore in submission)
-├── __pycache__/               # Python cache (ignore)
+
 
 ```
 

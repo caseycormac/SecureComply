@@ -568,6 +568,7 @@ def generate_html(audit: dict, source_json: str, use_ai: bool = True) -> str:
     score, band, summary = _overall_score_and_band(audit)
     # NEW: Data Quality Score
     data_quality = _calculate_data_quality(audit)
+    na_controls = audit.get("overall", {}).get("na_controls", 0)
     #test
     benchmark = load_benchmark()
     #test
@@ -844,6 +845,15 @@ def generate_html(audit: dict, source_json: str, use_ai: bool = True) -> str:
                 Measures completeness of input data
               </div>
             </div>
+            <div style="margin-top:10px;">
+            <div class="muted tiny">N/A Controls Excluded</div>
+            <div style="font-size:18px; font-weight:600;">
+              {na_controls}
+            </div>
+            <div class="muted tiny">
+              Controls marked not applicable and excluded from scoring
+            </div>
+          </div>
             <div class="muted" style="margin-top:6px; white-space:pre-wrap; line-height:1.5;">
               {_html_escape(summary)}
             </div>

@@ -37,6 +37,22 @@ def fill_empty_fields(obj):
     else:
         return obj
 
+#Normalise N/A
+def normalise_na_values(record: dict) -> dict:
+    """
+    Converts all variations of N/A into a standard 'na' value.
+    """
+
+    NA_VALUES = {"na", "n/a", "NA", "N/A"}
+
+    for key, value in record.items():
+
+        if isinstance(value, str):
+            if value.strip().lower() in NA_VALUES:
+                record[key] = "na"
+
+    return record
+
 def normalise_record(record):
     boolean_map = {
         "true": True, "false": False,
@@ -147,6 +163,8 @@ def ingest_gdpr_json(json_file):
         # Step 2: Fill missing/empty values BEFORE normalisation
         flat = fill_empty_fields(flat)
 
+        flat = normalise_na_values(flat)
+        
         # Step 3: Normalise data types (booleans, ints, enums)
         flat = normalise_record(flat)
 

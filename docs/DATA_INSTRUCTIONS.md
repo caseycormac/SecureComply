@@ -74,9 +74,35 @@ Copy and modify the template below:
     }
   }
 ]
+
+You may replace any genuinely non-applicable field value with `N/A`.
+Example:
+- `"https_enabled": "N/A"`
+- `"dsar_response_time_days": "N/A"`
 ```
 
 ---
+## N/A Values
+
+SecureComply supports **Not Applicable** values for fields that do not apply to a given organisation.
+
+Accepted inputs:
+- `N/A`
+- `n/a`
+- `NA`
+- `na`
+
+How N/A is handled:
+- During ingestion, all supported N/A variants are normalised to `na`
+- N/A values are accepted during validation
+- N/A controls are **excluded from scoring**
+- Excluded controls do not reduce the final percentage score
+- Excluded controls are counted separately in the final report as **N/A Controls Excluded**
+
+Use N/A only where a control is genuinely not applicable to the organisation.
+Do not use N/A to avoid answering a relevant control.
+
+* * *
 
 ## Allowed Values
 
@@ -84,12 +110,12 @@ Copy and modify the template below:
 
 | Field | Allowed Values |
 |-------|--------------|
-| https_enabled | true / false |
-| password_storage_method | argon2, bcrypt, sha256, md5, plaintext |
-| regular_security_testing | continuous, quarterly, annual, ad_hoc, none |
-| encryption_at_rest | full_with_key_management, full, partial, none |
-| mfa_enforced | all_users, privileged_users, admin_only, none |
-| patch_management_frequency | weekly, monthly, quarterly, none |
+| https_enabled | true / false, "N/A" |
+| password_storage_method | argon2, bcrypt, sha256, md5, plaintext, "N/A" |
+| regular_security_testing | continuous, quarterly, annual, ad_hoc, none, "N/A" |
+| encryption_at_rest | full_with_key_management, full, partial, none, "N/A" |
+| mfa_enforced | all_users, privileged_users, admin_only, none, "N/A" |
+| patch_management_frequency | weekly, monthly, quarterly, none, "N/A" |
 
 ---
 
@@ -97,14 +123,14 @@ Copy and modify the template below:
 
 | Field | Allowed Values |
 |-------|--------------|
-| cookie_consent_mechanism | granular, opt_in, implied, none |
-| privacy_policy_present | true / false |
-| privacy_policy_clarity | clear, partially_clear, unclear, missing |
-| lawful_basis | contract, legal_obligation, consent, legitimate_interests, public_task, vital_interests, mixed |
-| third_party_sharing_disclosed | full, partial, unclear, none |
-| dsar_response_time_days | Integer (e.g. 30) |
-| dsar_process | automated, documented, partial, informal, missing |
-| dsar_identity_verification | strong, weak, none |
+| cookie_consent_mechanism | granular, opt_in, implied, none, "N/A" |
+| privacy_policy_present | true / false, "N/A" |
+| privacy_policy_clarity | clear, partially_clear, unclear, missing, "N/A" |
+| lawful_basis | contract, legal_obligation, consent, legitimate_interests, public_task, vital_interests, mixed, "N/A" |
+| third_party_sharing_disclosed | full, partial, unclear, none, "N/A" |
+| dsar_response_time_days | Integer (e.g. 30), "N/A" |
+| dsar_process | automated, documented, partial, informal, missing, "N/A" |
+| dsar_identity_verification | strong, weak, none, "N/A" |
 
 ---
 
@@ -112,22 +138,25 @@ Copy and modify the template below:
 
 | Field | Allowed Values |
 |-------|--------------|
-| data_breach_process_maturity | tested, documented, informal, none |
-| breach_notification_hours | Integer (e.g. 72) |
-| data_retention_policy | legal_only, mixed, operational, indefinite, none |
-| retention_period_days | Integer (e.g. 30, 90, 180) |
-| record_of_processing | automated, complete, partial, none |
-| dpia_process | integrated, documented, ad_hoc, none |
-| has_dpo | appointed, outsourced, informal_role, none |
+| data_breach_process_maturity | tested, documented, informal, none, "N/A" |
+| breach_notification_hours | Integer (e.g. 72), "N/A" |
+| data_retention_policy | legal_only, mixed, operational, indefinite, none, "N/A" |
+| retention_period_days | Integer (e.g. 30, 90, 180), "N/A" |
+| record_of_processing | automated, complete, partial, none, "N/A" |
+| dpia_process | integrated, documented, ad_hoc, none, "N/A" |
+| has_dpo | appointed, outsourced, informal_role, none, "N/A" |
 
 ---
 
 ## Notes
 
-- Field names are **case-sensitive**
-- Values must match exactly (e.g. `"bcrypt"` not `"BCRYPT"`)
-- Integers must not be quoted (e.g. `30`, not `"30"`)
-- Boolean values must be `true` or `false` (lowercase)
+- Field names are case-sensitive
+- Values should match the allowed options exactly
+- Enum values are normalised to lowercase during ingestion
+- Integers should be provided as numbers, not quoted strings where possible
+- Boolean values should be `true` or `false`
+- `N/A`, `n/a`, `NA`, and `na` are accepted for supported fields
+- Blank or missing values may be treated as missing data rather than not applicable
 
 ---
 

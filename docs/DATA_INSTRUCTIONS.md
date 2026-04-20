@@ -50,8 +50,7 @@ Copy and modify the template below:
       "password_storage_method": "bcrypt",
       "regular_security_testing": "quarterly",
       "encryption_at_rest": "full",
-      "mfa_enforced": "all_users",
-      "patch_management_frequency": "monthly"
+      "mfa_enforced": "all_users"
     },
     "transparency_user_rights": {
       "cookie_consent_mechanism": "opt_in",
@@ -60,8 +59,7 @@ Copy and modify the template below:
       "lawful_basis": "contract",
       "third_party_sharing_disclosed": "full",
       "dsar_response_time_days": 30,
-      "dsar_process": "documented",
-      "dsar_identity_verification": "strong"
+      "dsar_process": "documented"
     },
     "internal_controls": {
       "data_breach_process_maturity": "tested",
@@ -115,7 +113,6 @@ Do not use N/A to avoid answering a relevant control.
 | regular_security_testing | continuous, quarterly, annual, ad_hoc, none, "N/A" |
 | encryption_at_rest | full_with_key_management, full, partial, none, "N/A" |
 | mfa_enforced | all_users, privileged_users, admin_only, none, "N/A" |
-| patch_management_frequency | weekly, monthly, quarterly, none, "N/A" |
 
 ---
 
@@ -130,7 +127,6 @@ Do not use N/A to avoid answering a relevant control.
 | third_party_sharing_disclosed | full, partial, unclear, none, "N/A" |
 | dsar_response_time_days | Integer (e.g. 30), "N/A" |
 | dsar_process | automated, documented, partial, informal, missing, "N/A" |
-| dsar_identity_verification | strong, weak, none, "N/A" |
 
 ---
 

@@ -44,9 +44,6 @@ MFA_ENFORCED = [
     "none", "admin_only", "privileged_users", "all_users"
 ]
 
-PATCH_MANAGEMENT_FREQUENCY = [
-    "ad_hoc", "quarterly", "monthly", "weekly", "automated"
-]
 
 COOKIE_CONSENT_MECHANISM = [
     "none", "implied", "opt_in", "granular"
@@ -67,10 +64,6 @@ THIRD_PARTY_SHARING_DISCLOSED = [
 
 DSAR_PROCESSES = [
     "missing", "informal", "partial", "documented", "automated"
-]
-
-DSAR_IDENTITY_VERIFICATION = [
-    "none", "basic", "strong", "multi_step"
 ]
 
 BREACH_PROCESS_MATURITY = [
@@ -130,7 +123,6 @@ def generate_sme_gdpr_data_v2() -> dict:
             "regular_security_testing": random.choice(SECURITY_TESTING_FREQUENCY),
             "encryption_at_rest": random.choice(ENCRYPTION_AT_REST),
             "mfa_enforced": random.choice(MFA_ENFORCED),
-            "patch_management_frequency": random.choice(PATCH_MANAGEMENT_FREQUENCY),
         },
 
         "transparency_user_rights": {
@@ -141,7 +133,6 @@ def generate_sme_gdpr_data_v2() -> dict:
             "third_party_sharing_disclosed": random.choice(THIRD_PARTY_SHARING_DISCLOSED),
             "dsar_response_time_days": random.randint(1, 99),
             "dsar_process": random.choice(DSAR_PROCESSES),
-            "dsar_identity_verification": random.choice(DSAR_IDENTITY_VERIFICATION),
         },
 
         "internal_controls": {

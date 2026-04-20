@@ -59,10 +59,6 @@ def validate_gdpr_record(record):
     if value not in allowed and str(value).lower() != "na":
         errors.append(invalid_enum("mfa_enforced", value, allowed))
 
-    value = record.get("patch_management_frequency")
-    allowed = ["ad_hoc", "quarterly", "monthly", "weekly", "automated", EMPTY]
-    if value not in allowed and str(value).lower() != "na":
-        errors.append(invalid_enum("patch_management_frequency", value, allowed))
 
     # -----------------------------------
     # TRANSPARENCY & USER RIGHTS
@@ -107,11 +103,6 @@ def validate_gdpr_record(record):
     allowed = ["missing", "informal", "partial", "documented", "automated", EMPTY]
     if value not in allowed and str(value).lower() != "na":
         errors.append(invalid_enum("dsar_process", value, allowed))
-
-    value = record.get("dsar_identity_verification")
-    allowed = ["none", "basic", "strong", "multi_step", EMPTY]
-    if value not in allowed and str(value).lower() != "na":
-        errors.append(invalid_enum("dsar_identity_verification", value, allowed))
 
     # -----------------------------------
     # INTERNAL CONTROLS

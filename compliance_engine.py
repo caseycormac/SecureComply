@@ -341,6 +341,11 @@ def compute_audit(record: Dict[str, Any]) -> Dict[str, Any]:
         dsar_time_score = 0
         dsar_time_max = 0
         dsar_time_notes = "Excluded from scoring (not applicable)."
+    elif str(dsar_input).lower() == "empty":
+        dsar_days = 0
+        dsar_time_score = 0
+        dsar_time_max = dsar_time_pts
+        dsar_time_notes = "dsar_response_time_days is empty (not documented / no defined timeframe)."
     else:
         dsar_days = int(dsar_input)
         dsar_time_score = score_days(dsar_days, [(30, 4), (45, 2), (10**9, 0)])
@@ -350,7 +355,7 @@ def compute_audit(record: Dict[str, Any]) -> Dict[str, Any]:
     results.append(ControlResult(
         "dsar_response_time_days", "transparency_user_rights", dsar_days,
         dsar_time_score, dsar_time_max,
-        "≤30=>4, 31–45=>2, >45=>0",
+        "empty=>0; ≤30=>4, 31–45=>2, >45=>0",
         "GDPR statutory DSAR response baseline is 30 days.",
         notes=dsar_time_notes
     ))
@@ -416,6 +421,11 @@ def compute_audit(record: Dict[str, Any]) -> Dict[str, Any]:
         breach_notify_score = 0
         breach_notify_max = 0
         breach_notes = "Excluded from scoring (not applicable)."
+    elif str(breach_input).lower() == "empty":
+        breach_hours = 0
+        breach_notify_score = 0
+        breach_notify_max = breach_notify_pts
+        breach_notes = "breach_notification_hours is empty (not documented / no defined notification timeframe)."
     else:
         breach_hours = int(breach_input)
         breach_notify_score = score_days(breach_hours, [(72, 5), (96, 2), (10**9, 0)])
@@ -425,11 +435,10 @@ def compute_audit(record: Dict[str, Any]) -> Dict[str, Any]:
     results.append(ControlResult(
         "breach_notification_hours", "internal_controls", breach_hours,
         breach_notify_score, breach_notify_max,
-        "≤72=>5, 73–96=>2, >96=>0",
+        "empty=>0; ≤72=>5, 73–96=>2, >96=>0",
         "Ability to notify within 72 hours supports incident response expectations.",
         notes=breach_notes
     ))
-
 
     # data_retention_policy (enum)
     ret_pol_pts = 7
@@ -464,6 +473,11 @@ def compute_audit(record: Dict[str, Any]) -> Dict[str, Any]:
         ret_days_score = 0
         ret_days_max = 0
         ret_days_notes = "Excluded from scoring (not applicable)."
+    elif str(ret_input).lower() == "empty":
+        ret_days = 0
+        ret_days_score = 0
+        ret_days_max = ret_days_pts
+        ret_days_notes = "retention_period_days is empty (undefined / not documented)."
     else:
         ret_days = int(ret_input)
         if ret_days == 0:
@@ -478,7 +492,7 @@ def compute_audit(record: Dict[str, Any]) -> Dict[str, Any]:
     results.append(ControlResult(
         "retention_period_days", "internal_controls", ret_days,
         ret_days_score, ret_days_max,
-        "0=>0; else ≤30=>3, ≤90=>2, ≤180=>1, >180=>0",
+        "empty=>0; 0=>0; else ≤30=>3, ≤90=>2, ≤180=>1, >180=>0",
         "Shorter retention aligns more closely with minimisation/storage limitation.",
         notes=ret_days_notes
     ))

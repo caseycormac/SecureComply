@@ -100,27 +100,31 @@ data/my_sme_input.json
 
 [
   {
-    "https_enabled": true,
-    "password_storage_method": "bcrypt",
-    "regular_security_testing": "quarterly",
-    "encryption_at_rest": "full",
-    "mfa_enforced": "all_users",
-
-    "cookie_consent_mechanism": "granular",
-    "privacy_policy_present": true,
-    "privacy_policy_clarity": "clear",
-    "lawful_basis": "contract",
-    "third_party_sharing_disclosed": "full",
-    "dsar_response_time_days": 30,
-    "dsar_process": "documented",
-
-    "data_breach_process_maturity": "tested",
-    "breach_notification_hours": 72,
-    "data_retention_policy": "legal_only",
-    "retention_period_days": 30,
-    "record_of_processing": "complete",
-    "dpia_process": "documented",
-    "has_dpo": "appointed"
+    "basic_security_measures": {
+      "https_enabled": true,
+      "password_storage_method": "argon2", 
+      "regular_security_testing": "continuous", 
+      "encryption_at_rest": "full_with_key_management",
+      "mfa_enforced": "all_users"
+    },
+    "transparency_user_rights": {
+      "cookie_consent_mechanism": "granular", 
+      "privacy_policy_present": true,
+      "privacy_policy_clarity": "clear",
+      "lawful_basis": "contract", 
+      "third_party_sharing_disclosed": "full",
+      "dsar_response_time_days": 30,
+      "dsar_process": "automated" 
+    },
+    "internal_controls": {
+      "data_breach_process_maturity": "tested",
+      "breach_notification_hours": 72,
+      "data_retention_policy": "legal_only",
+      "retention_period_days": 30,
+      "record_of_processing": "automated",
+      "dpia_process": "integrated",
+      "has_dpo": "appointed"
+    }
   }
 ]
 
@@ -129,49 +133,63 @@ data/my_sme_input.json
 ------------------------------------
 ALLOWED VALUES
 ------------------------------------
+https_enabled:
+• true | false | "na" | "empty"
 
+privacy_policy_present:
+• true | false | "na" | "empty"
+
+dsar_response_time_days:
+• integer 1–99 | "na" | "empty"
+
+breach_notification_hours:
+• integer 1–168 | "na" | "empty"
+
+retention_period_days:
+• integer 0–365 | "na" | "empty"
+          
 password_storage_method:
-• argon2 | bcrypt | sha256 | md5 | plaintext
+• argon2 | bcrypt | sha256 | md5 | plaintext | na | empty
 
 regular_security_testing:
-• continuous | quarterly | annual | ad_hoc | none
+• continuous | quarterly | annual | ad_hoc | none | na | empty
 
 encryption_at_rest:
-• full_with_key_management | full | partial | none
+• full_with_key_management | full | partial | none | na | empty
 
 mfa_enforced:
-• all_users | privileged_users | admin_only | none
+• all_users | privileged_users | admin_only | none | na | empty
 
 cookie_consent_mechanism:
-• granular | opt_in | implied | none
+• granular | opt_in | implied | none | na | empty
 
 privacy_policy_clarity:
-• clear | partially_clear | unclear | missing
+• clear | partially_clear | unclear | missing | na | empty
 
 lawful_basis:
 • contract | legal_obligation | public_task
-• legitimate_interests | consent | vital_interests | mixed
+• legitimate_interests | consent | vital_interests | mixed | na | empty
 
 third_party_sharing_disclosed:
-• full | partial | unclear | none
+• full | partial | unclear | none | na | empty
 
 dsar_process:
-• automated | documented | partial | informal | missing
+• automated | documented | partial | informal | missing | na | empty
 
 data_breach_process_maturity:
-• tested | documented | informal | none
+• tested | documented | informal | none | na | empty
 
 data_retention_policy:
-• legal_only | mixed | operational | indefinite | none
+• legal_only | mixed | operational | indefinite | none | na | empty
 
 record_of_processing:
-• automated | complete | partial | none
+• automated | complete | partial | none | na | empty
 
 dpia_process:
-• integrated | documented | ad_hoc | none
+• integrated | documented | ad_hoc | none | na | empty
 
 has_dpo:
-• appointed | outsourced | informal_role | none
+• appointed | outsourced | informal_role | none | na | empty
 
 ------------------------------------
 IMPORTANT
@@ -180,6 +198,11 @@ IMPORTANT
 • Numbers must be integers (e.g. 30, 72)
 • Invalid values will fail validation
 
+Notes:
+• Blank or missing values may be treated as "empty" internally
+• N/A values are accepted and normalised to "na"
+• N/A controls are excluded from scoring
+          
 [RUN COMMAND]
 python run.py data/my_sme_input.json
 

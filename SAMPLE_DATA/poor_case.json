@@ -1,0 +1,29 @@
+[
+  {
+    "basic_security_measures": {
+      "https_enabled": false,
+      "password_storage_method": "plaintext",
+      "regular_security_testing": "none",
+      "encryption_at_rest": "none",
+      "mfa_enforced": "none"
+    },
+    "transparency_user_rights": {
+      "cookie_consent_mechanism": "none",
+      "privacy_policy_present": false,
+      "privacy_policy_clarity": "missing",
+      "lawful_basis": "mixed",
+      "third_party_sharing_disclosed": "none",
+      "dsar_response_time_days": "empty",
+      "dsar_process": "missing"
+    },
+    "internal_controls": {
+      "data_breach_process_maturity": "none",
+      "breach_notification_hours": 120,
+      "data_retention_policy": "none",
+      "retention_period_days": "empty",
+      "record_of_processing": "none",
+      "dpia_process": "none",
+      "has_dpo": "none"
+    }
+  }
+]

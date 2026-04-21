@@ -1,0 +1,29 @@
+[
+  {
+    "basic_security_measures": {
+      "https_enabled": "Boolean_Error_Example",
+      "password_storage_method": "Error_Example_Demonstration", 
+      "regular_security_testing": "continuous", 
+      "encryption_at_rest": "full_with_key_management",
+      "mfa_enforced": "all_users"
+    },
+    "transparency_user_rights": {
+      "cookie_consent_mechanism": "granular", 
+      "privacy_policy_present": true,
+      "privacy_policy_clarity": "clear",
+      "lawful_basis": "contract", 
+      "third_party_sharing_disclosed": "full",
+      "dsar_response_time_days": "Integer_Error_Example",
+      "dsar_process": "automated" 
+    },
+    "internal_controls": {
+      "data_breach_process_maturity": "tested",
+      "breach_notification_hours": 72,
+      "data_retention_policy": "legal_only",
+      "retention_period_days": 30,
+      "record_of_processing": "1202wiaxs Error_Example",
+      "dpia_process": "integrated",
+      "has_dpo": "appointed"
+    }
+  }
+]

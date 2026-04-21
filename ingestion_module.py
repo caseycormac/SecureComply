@@ -143,10 +143,13 @@ def ingest_gdpr_json(json_file):
     except FileNotFoundError:
         print(f"Error: File '{json_file}' not found.")
         sys.exit(1)
-    except json.JSONDecodeError:
-        print(f"Error: Invalid JSON format in '{json_file}' please check values are correct.")
+    except json.JSONDecodeError as e:
+        print(f"\n❌ Invalid JSON in '{json_file}'")
+        print(f"   Line: {e.lineno}, Column: {e.colno}")
+        print(f"   Problem: {e.msg}")
+        print("   Tip: Check for missing quotes around text values, missing commas, or broken brackets.")
         sys.exit(1)
-
+        
     if isinstance(raw_data, dict):
         raw_data = [raw_data]
     elif not isinstance(raw_data, list):

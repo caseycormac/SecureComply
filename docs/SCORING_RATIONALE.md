@@ -226,6 +226,5 @@ This scoring approach is appropriate for the SecureComply project because it:
 - produces prioritised remediation guidance,
 - and remains flexible through support for missing and N/A values.
 
-For an academic final-year project, this is important because the model is not a black box. Each score can be traced back to an explicit rule, justification, and weighting decision in the compliance engine. fileciteturn0file14
 
 ---
